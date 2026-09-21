@@ -9,6 +9,7 @@ export function SpotSearch() {
   const [query, setQuery] = useState(searchParams.get("q") ?? "");
 
   useEffect(() => {
+    // Wait for typing to pause before replacing the URL and refreshing the results.
     const timeout = setTimeout(() => {
       const params = new URLSearchParams(searchParams.toString());
       if (query.trim()) {

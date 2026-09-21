@@ -33,6 +33,7 @@ db.exec(`
 
 const spotCount = db.prepare("SELECT COUNT(*) AS count FROM spots").get() as { count: number };
 
+// Populate starter data only when this is a new database.
 if (spotCount.count === 0) {
   const seedSpot = db.prepare(`
     INSERT INTO spots (naam, soort_eten, locatie, omschrijving, afbeelding_url, tiktok_url, google_maps_url)
@@ -50,6 +51,7 @@ if (spotCount.count === 0) {
   insertSeeds();
 }
 
+// Keep the locations in databases created with earlier seed data up to date.
 const specificSeedLocations = [
   ["The Burger Bus", "Jansplein 1, 6811 GD Arnhem", "https://www.google.com/maps/search/?api=1&query=Jansplein+1%2C+6811+GD+Arnhem"],
   ["Sushi on Wheels", "Daalseweg 262, 6523 AR Nijmegen", "https://www.google.com/maps/search/?api=1&query=Daalseweg+262%2C+6523+AR+Nijmegen"],
